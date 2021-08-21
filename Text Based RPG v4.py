@@ -206,18 +206,16 @@ while True:
         #check that they are allowed wherever they want to go
         if move[1] in rooms[currentRoom]:
             if rooms[currentRoom][move[1]]['requirement'] == 'none':
-                #set the current room to the new room
+                print("it\'s not locked!")
                 currentRoom = rooms[currentRoom][move[1]]['destination']
-                #there is no door (link) to the new room
-            else:
+            elif rooms[currentRoom][move[1]]['requirement'] == 'key':
                 if 'key' in inventory:
-                    if move[1] in rooms[currentRoom]:
-                        #set the current room to the new room
-                        currentRoom = rooms[currentRoom][move[1]]['destination']
-                        #there is no door (link) to the new room
-                        inventory.remove('key')
-                    else:
-                        print('You need a key for that')
+                    #set the current room to the new room
+                    currentRoom = rooms[currentRoom][move[1]]['destination']
+                    #there is no door (link) to the new room
+                    inventory.remove('key')
+                else:
+                    print('You need a key for that')
         else:
             print('You  can\'t go that way!')
             
